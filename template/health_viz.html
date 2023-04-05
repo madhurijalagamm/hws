@@ -1,0 +1,85 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<!-- <style>
+    div{
+        background-color: black;
+        margin: 15px;
+    }
+    
+
+    .bargraph, .piechart{
+        flex: 50%;
+        width: 48vw;
+    }
+
+    .graphs{
+        display: flex;
+        height: 100vh;
+        margin: 5px;
+        overflow: hidden;
+        position: absolute;
+        
+    }
+
+</style> -->
+
+
+
+<style>
+    
+.bargraph{
+    display: grid;
+    grid-template-columns: auto auto auto;
+ 
+}
+
+.piechart{
+    display: grid;
+    grid-template-columns: auto auto;
+  
+}
+
+.bg1, .bg2{
+    grid-gap: 20px;
+  border: 2px solid rgb(149, 155, 212);
+  padding: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.pc1, .pc2{
+    grid-gap: 20px;
+  border: 2px solid rgb(149, 155, 212);
+  padding: 10px;
+  margin-right: 5px;
+}
+</style>
+
+<h1>CSIT students</h1>
+
+
+<br>
+<div class="graphs">
+    <div class="bargraph">
+        <div class="bg1">
+            {{ barchart1|safe }}
+        </div>
+        <div class="bg2">
+            {{ barchart2|safe }}
+        </div>
+        <!-- <div>
+            {{ barchart3|safe }}
+        </div> -->
+    </div>
+
+    <div class="piechart">
+        <div class="pc1">
+            {{ piechart1|safe }}
+        </div>
+        <div class="pc2">
+            {{ piechart2|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+	body{
+		font-family: Arial, Helvetica, sans-serif;
+		background-color: rgb(109, 184, 210);
+		background-image: url(https://st3.depositphotos.com/1162190/14047/i/450/depositphotos_140478472-stock-photo-blue-sea-and-sky-white.jpg);
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		color: aliceblue;
+	}
+
+        .button{
+        width: 10%;
+		font-size: 15px;
+		margin: 8px 0px;
+		padding: 12px 20px;
+		display: inline-block;
+		box-sizing: border-box;
+		border-radius: 25px;
+		background: red;
+		background-position: left top;
+		background-repeat: repeat;
+		display:block;
+		
+		color: #fff;
+            }
+            label{
+                font-size: 20px;
+                text-align: left;
+                color: #fff;
+            }
+            /* form{
+                border: 3px solid #f1f1f1;
+            } */
+
+            .container{
+                float: right;
+                width: 80%;
+            }
+            .container button{
+                width: 10%;
+                font-size: 15px;
+                margin: 8px 0px;
+                padding: 12px 20px;
+                display: inline-block;
+                box-sizing: border-box;
+                border-radius: 25px;
+                background: red;
+                background-position: left top;
+                background-repeat: repeat;
+                display:block;
+                
+                color: #fff;
+            }
+            input[type=email],input[type=text],input[type=password]{
+                width: 35%;
+                font-size: 15px;
+                margin: 8px 0px;
+                padding: 12px 20px;
+                display: inline-block;
+                box-sizing: border-box;
+                border-radius: 25px;
+                background: cornsilk;
+                background-position: left top;
+                background-repeat: repeat;
+                display:block;
+                
+                
+                
+            }
+            input[type=radio]{
+                height: 18px;
+                width: 18px;
+            }
+            
+            .button:hover{
+                opacity:0.7;
+
+            }
+            .container{
+                padding: 50px;
+                
+            }
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+            }
+              
+            img.avatar {
+                width: 10%;
+                border-radius: 50%;
+            }  
+
+	
+</style>
+
+
+
+<h2 class ="text-center" style="color: antiquewhite; text-align: center;"> Register </h2>
+
+<div class = "container" style="float:right"> 
+
+<form method="POST" action="{% url 'register' %}">
+		{% csrf_token %}
+
+		{% if form.errors %}
+		<div class="alert alert-danger alart-dismissable" role ="alert">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                  </button>
+               
+
+               {% for field in form%}
+               	{% if field.errors%}
+               		{{field.errors}}
+               	{% endif%}
+
+               	{% endfor %}
+
+
+              </div>
+
+
+
+		{% endif %}
+
+
+		{{ form.as_p }}
+
+
+		<input type="submit" value="Register" class=" button">
+	</form>
+</div>
+{% endblock %}

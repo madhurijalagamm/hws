@@ -1,0 +1,329 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" 
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" />
+
+        <link rel="stylesheet" href="styles.css" />
+
+        <style>
+            * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+
+  html, body {
+  height: 100%;
+}
+
+  body {
+   
+    background-color: white;
+    }
+
+li {
+    list-style:none;
+}
+
+a {
+    text-decoration:none;
+    color:black;
+    font-size: 1rem;
+}
+
+a:hover {
+    color: orange;
+}
+
+ header {
+    position: relative;
+    padding: 0.2rem;
+ }
+ .navbar{
+    width: 100%;
+    height:60px;
+    max-width: 1600px;
+    margin: 0% auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.5); /* Use rgba to set the background color with alpha value */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add some shadow to the navbar */
+    padding: 20px; /* Add some padding to the navbar */
+    position: fixed;
+    top: 0;
+ }
+
+ 
+ .navbar .links{
+    display: flex;
+    gap: 2rem;
+ }
+
+ .navbar .toggle_btn{
+    color:black;
+    font-size:1.5rem;
+    cursor: pointer;
+    display: none;
+ }
+
+ .action_btn{
+    background-color: orange;
+    color: black;
+    padding: 0.5rem 1rem;
+    border:none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: scale 0.2 ease;
+
+ }
+.action_btn:hover{
+    scale: 1.05;
+    color: #fff;
+}
+
+.action_btn:active {
+    scale: 0.95;
+} 
+
+.dropdown_menu{
+    display:none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open{
+    height: 300px;
+}
+
+.dropdown_menu li{
+    padding: 0.7rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+}
+
+footer ul li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+footer ul li:first-child {
+  margin-left: 0;
+}
+
+
+@media(max-width:992px)
+{
+    .navbar .links,
+    .navbar .action_btn
+    {
+        display:none;
+    }
+
+    .navbar .toggle_btn
+    {
+        display:block;
+    }
+    .dropdown_menu
+    {
+        display: block;
+    }
+}
+
+@media(max-width:576px){
+    .dropdown_menu {
+        left: 2rem;
+        width:unset;
+    }
+
+}
+
+ 
+        </style>
+
+        <title>Base Page</title>
+        
+    </head>
+    <body>
+        <header>
+            <!-- <center><h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 100px;"><b>EL COMICOS</b></h1></center> -->
+
+            <div class="navbar">
+                <div class="logo"> <a href="{% url 'dashboard' %}"><img src="../static/hws_ananthavaram/images/icon.png" width="45" height="45"/></a></div>
+
+                <ul class = "links">
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>               
+                    <li><a href="{% url 'chartview'%}">CSIT health</a></li>
+                    <!-- <li><a href="http://localhost:8000/jokes/">Write Jokes</a></li> -->
+                    <li><a href="{% url 'blog_list' %}">Blog</a></li>
+                    <li><a href="{% url 'klumap' %}">KL Map</a></li>
+                    {% if user.is_authenticated %}
+      
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+
+                    <li><a href="{% url 'profile' %}" class="action_btn">                    <i class="fa fa-user" aria-hidden="true"></i>
+Profile</a>
+
+                <div class="toggle_btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+              </li>
+                    
+                    
+                    {% else %}
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+          
+                      <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+          
+                    {% endif%}
+                </ul>
+
+
+               
+                
+
+
+
+                
+            </div>
+            <div class="dropdown_menu">
+                    <li><a href="http://localhost:8000/home/">Home</a></li>               
+                    <li><a href="http://localhost:8000/performers/">Performers</a></li>
+                    <!-- <li><a href="http://localhost:8000/jokes/">Write Jokes</a></li> -->
+                    <li><a href="http://localhost:8000/seejokes/">Jokes</a></li>
+                    <li><a href="http://localhost:8000/login/">Login</a></li>
+                    <li><a href="http://localhost:8000/signup/">Sign Up</a></li>
+                    <li><a href="#" class="action_btn">Get Started</a></li>
+            </div>  
+
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+            
+        </header>
+        
+        
+        
+      
+
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown_menu')
+
+
+        toggleBtn.onclick = function(){
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+
+
+            toggleBtnIcon.classList = isOpen
+            ? 'fa-solid fa-xmark'
+            : 'fa-solid fa-bars'
+        }
+    </script>
+
+
+
+    <main>
+        <div class="pre" 
+        style="height: 60px;">
+
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+          <center><div class="alert-top" style="border: 5px; border-color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); 
+          border-radius: 5px; width: 100%; padding: 20px; opacity: 0.5; color: #ccc;">
+              <button class="close" data-dismiss="alert">
+                  X
+                </button>
+              {{ message }}
+            </div></center>
+            
+          {% endfor%}
+        {% endif %}
+
+
+        {% block content %}
+        {% endblock %}
+    </main>
+   
+
+
+    <!-- <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p>&copy; 2023 ElComicos. All Rights Reserved.</p>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-inline">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+       -->
+    </body>
+
+</html> 

@@ -83,6 +83,11 @@
   </div>
   
     {% endfor %}
+
+    {% block content %}
+        <h2>Session Fun!</h2>
+        <p>You have visited this page {{ num_visits }} times.</p>
+    {% endblock %}
   
 </body>
 </html>

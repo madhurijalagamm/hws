@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+{%block content%}
+<body>
+  <h1>Health and Awareness System</h1>
+    <h2>welcome to home page!</h2>
+    <p>You are logged in as {{ user.username }}.</p>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+</body>
+{% endblock%}
